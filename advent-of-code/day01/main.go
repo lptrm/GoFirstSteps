@@ -14,8 +14,6 @@ func main() {
 	var sum int
 
 	regexPattern := "[A-Z,a-z]"
-	numberPatterns := "[one,two,three,four,five,six,seven,eight,nine,ten,eleven]"
-	numberSuffix := "[teen,ty]"
 
 	reader := bufio.NewReader(os.Stdin)
 
