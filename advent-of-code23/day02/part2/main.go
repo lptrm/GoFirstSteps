@@ -14,8 +14,6 @@ func main() {
 	regexPattern := `\b\d{1,2}\s\w+\b`
 	reader := bufio.NewReader(os.Stdin)
 
-	gameCounter := 0
-
 	for {
 		greenCubes := 0
 		redCubes := 0
@@ -32,7 +30,6 @@ func main() {
 			if strings.TrimSpace(line) == "" {
 				continue
 			}
-			gameCounter += 1
 			regex, err := regexp.Compile(regexPattern)
 			if err != nil {
 				fmt.Println("Error compiling regex:", err)
