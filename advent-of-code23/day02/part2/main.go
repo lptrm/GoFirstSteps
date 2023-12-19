@@ -42,9 +42,9 @@ func main() {
 				fmt.Println("Error compiling regex:", err)
 				return
 			}
-			cubeSet := strings.Split(line, ";")
-			for _, cube := range cubeSet {
-				matches := regex.FindAllString(cube, -1)
+			cubeSets := strings.Split(line, ";")
+			for _, cubeSet := range cubeSets {
+				matches := regex.FindAllString(cubeSet, -1)
 				for _, match := range matches {
 					number, err := strconv.Atoi(strings.Split(match, " ")[0])
 					if err != nil {
