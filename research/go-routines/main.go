@@ -16,7 +16,7 @@ func sumSet(start, end int, wg *sync.WaitGroup, c chan int) {
 }
 
 func main() {
-	const n = 100       // number of integers to sum
+	const n = 100000    // number of integers to sum
 	rangeSize := n / 10 // size of each range
 
 	c := make(chan int)   // unbuffered channel
@@ -32,6 +32,7 @@ func main() {
 		close(c)  // close the channel
 	}()
 
+	fmt.Println("Waiting for goroutines to finish...") // if the anonymous goroutine is used, this line will be printed before the goroutines finish
 	result := 0
 	for sum := range c { // iterate over the channel
 		result += sum
