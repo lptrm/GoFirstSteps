@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Println("Waiting for goroutines to finish...") // if the anonymous goroutine is used, this line will be printed before the goroutines finish
 	result := 0
-	for sum := range c { // iterate over the channel
+	for sum := range c { // iterates over the channel, but has to wait until the channel is closed before it can iterate
 		result += sum
 	}
 
