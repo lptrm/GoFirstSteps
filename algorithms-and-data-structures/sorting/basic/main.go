@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	originalString := "thequickbrownfoxjumpsoverthelazydog"
+	originalString := "thequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsoverthelazydog"
 
 	byteArray := []byte(originalString)
 
@@ -40,6 +40,14 @@ func main() {
 	fmt.Println("shellSort")
 	startTime = time.Now()
 	shellSort(byteArray)
+	endTime = time.Now()
+	fmt.Println("Sorted Array:", byteArray)
+	fmt.Println("String Rep:", string(byteArray))
+	fmt.Println("The Time was:", endTime.Sub(startTime))
+
+	fmt.Println("heapSort")
+	startTime = time.Now()
+	heapSort(byteArray)
 	endTime = time.Now()
 	fmt.Println("Sorted Array:", byteArray)
 	fmt.Println("String Rep:", string(byteArray))
@@ -101,10 +109,37 @@ func insertionSortH(s []byte, h int) {
 		}
 	}
 }
+func heapSort(s []byte) {
+	for i := len(s) - 1/2; i > 1; i-- {
+		percolate(s, i, len(s))
+	}
+	for i := len(s) - 1; i > 1; i-- {
+		swap(s, 0, i)
+		percolate(s, 0, i)
+	}
+}
+func percolate(s []byte, start int, end int) {
+	current := start
+	for j := 2 * current; j+1 <= end; {
+		left := j
+		right := j + 1
+		if s[left] > s[right] && s[left] > s[current] {
+			swap(s, current, left)
+			current = left
+		} else if s[left] == s[right] || s[left] < s[right] && s[right] > s[current] {
+			swap(s, current, right)
+			current = right
+		} else {
+			break
+		}
+	}
+
+}
 func swap(s []byte, i int, index int) {
 	if i != index {
 		tmp := s[i]
 		s[i] = s[index]
 		s[index] = tmp
 	}
+
 }
