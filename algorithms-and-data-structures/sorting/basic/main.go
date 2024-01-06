@@ -60,96 +60,92 @@ func main() {
 	fmt.Println("The Time was:", endTime.Sub(startTime))
 
 }
-func selectionSort(s []byte) {
-	var index int
-	for i := 0; i < len(s); i++ {
-		index = i
-		current := s[i]
-		for j := i; j < len(s); j++ {
-			if current > s[j] {
-				index = j
-				current = s[j]
+func selectionSort(arr []byte) {
+	var next int
+	for current := 0; current < len(arr); current++ {
+		next = current
+		for candidate := current + 1; candidate < len(arr); candidate++ {
+			if arr[next] > arr[candidate] {
+				next = candidate
 			}
 		}
-		swap(s, i, index)
+		swap(arr, current, next)
 	}
 }
 func selectionSortRec(s []byte, i int, j int, index int, current byte) {
 
 }
-func bubbleSort(s []byte) {
+func bubbleSort(arr []byte) {
 	sorted := false
 	for !sorted {
 		sorted = true
-		for i := 0; i < len(s)-1; i++ {
-			if s[i] > s[i+1] {
+		for current := 0; current < len(arr)-1; current++ {
+			if arr[current] > arr[current+1] {
 				sorted = false
-				swap(s, i, i+1)
+				swap(arr, current, current+1)
 			}
 		}
 	}
 }
-func insertionSort(s []byte) {
-	for i := 0; i < len(s); i++ {
-		for j := i; j > 0 && s[j] < s[j-1]; j-- {
-			swap(s, j, j-1)
+func insertionSort(arr []byte) {
+	for current := 0; current < len(arr); current++ {
+		for next := current; next > 0 && arr[next] < arr[next-1]; next-- {
+			swap(arr, next, next-1)
 		}
 	}
 }
 
-func shellSort(s []byte) {
-	hSeries := [7]int{1093, 364, 121, 40, 13, 4, 1}
-	for _, h := range hSeries {
-		if h > len(s) {
+func shellSort(arr []byte) {
+	gapSeries := [7]int{1093, 364, 121, 40, 13, 4, 1}
+	for _, gap := range gapSeries {
+		if gap > len(arr) {
 			continue
 		}
-		insertionSortH(s, h)
+		insertionSortH(arr, gap)
 	}
 
 }
 
-func insertionSortH(array []byte, gap int) {
-	for current := 0; current < len(array); current = current + gap {
-		for next := current; next > 0 && array[next] < array[next-gap]; next = next - gap {
-			swap(array, next, next-gap)
+func insertionSortH(arr []byte, gap int) {
+	for current := 0; current < len(arr); current = current + gap {
+		for next := current; next > 0 && arr[next] < arr[next-gap]; next = next - gap {
+			swap(arr, next, next-gap)
 		}
 	}
 }
-func percolate(a []byte, j, t int) {
-	h := 2 * j // when putting this in the for loop, it wont work???
-	for h <= t {
-		if h < t && a[h+1] > a[h] {
-			h++
+func percolate(arr []byte, current, end int) {
+	for next := 2 * current; next <= end; {
+		if next < end && arr[next+1] > arr[next] {
+			next++
 		}
-		if a[h] > a[j] {
-			swap(a, h, j)
-			j = h
-			h = 2 * j
+		if arr[next] > arr[current] {
+			swap(arr, next, current)
+			current = next
+			next = 2 * current
 		} else {
 			break
 		}
 	}
 }
 
-func heapSort(a []byte) {
-	hi := len(a) - 1
-	j := len(a) - 1
-	for j = hi / 2; j >= 1; {
-		percolate(a, j, hi)
-		j--
+func heapSort(arr []byte) {
+	last := len(arr) - 1
+	for current := last / 2; current >= 1; {
+		percolate(arr, current, last)
+		current--
 	}
-	for j = hi; j > 1; {
-		swap(a, 1, j)
-		j--
-		percolate(a, 1, j)
+	for current := last; current > 1; {
+		swap(arr, 1, current)
+		current--
+		percolate(arr, 1, current)
 	}
 }
 
-func swap(array []byte, index1 int, index2 int) {
+func swap(arr []byte, index1 int, index2 int) {
 	if index1 != index2 {
-		tmp := array[index1]
-		array[index1] = array[index2]
-		array[index2] = tmp
+		tmp := arr[index1]
+		arr[index1] = arr[index2]
+		arr[index2] = tmp
 	}
 
 }
