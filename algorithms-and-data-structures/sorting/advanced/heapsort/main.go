@@ -27,6 +27,7 @@ func main() {
 	fmt.Println("Sorted Array:", byteArray)
 	fmt.Println("String Rep:", string(byteArray))
 	fmt.Println("The Time was:", endTime.Sub(startTime))
+
 }
 func heapify(arr []byte) {
 	last := len(arr) - 1
@@ -54,7 +55,7 @@ func percolate(arr []byte, current, end int) {
 func heapSort(arr []byte) {
 	last := len(arr) - 1
 	heapify(arr)
-	for current := last; current > 1; {
+	for current := last; current >= 1; {
 		sorting.Swap(arr, 1, current)
 		current--
 		percolate(arr, 1, current)
