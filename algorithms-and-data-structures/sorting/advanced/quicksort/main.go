@@ -10,7 +10,6 @@ func main() {
 	originalString := "thequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsoverthelazydog"
 
 	byteArray := []byte(originalString)
-
 	fmt.Println("quickSort")
 	startTime := time.Now()
 	quickSort(byteArray)
