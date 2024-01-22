@@ -6,7 +6,7 @@ import (
 
 func gfMultiply(a, b, primitive byte) byte {
 	var res byte
-
+	//multiply
 	for a != 0 {
 		if a&1 == 1 {
 			res ^= b
@@ -14,7 +14,13 @@ func gfMultiply(a, b, primitive byte) byte {
 		a >>= 1
 		b <<= 1
 	}
-	for res > 8 {
+	//determine module
+	limit := byte(128)
+	for limit > primitive {
+		limit >>= 1
+	}
+	//polynomial division
+	for res > limit {
 		primitiveShifted := primitive
 		for primitiveShifted<<1 < res {
 			primitiveShifted <<= 1
